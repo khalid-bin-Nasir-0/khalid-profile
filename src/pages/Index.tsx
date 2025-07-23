@@ -41,37 +41,41 @@ const Index = () => {
         <Hero />
         
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true, margin: "-50px" }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ margin: "-100px" }}
         >
           <About />
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true, margin: "-50px" }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          viewport={{ margin: "-100px" }}
         >
           <Skills />
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true, margin: "-50px" }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ margin: "-100px" }}
         >
           <Projects />
         </motion.div>
         
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true, margin: "-50px" }}
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          viewport={{ margin: "-100px" }}
         >
           <Contact />
         </motion.div>

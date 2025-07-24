@@ -134,7 +134,7 @@ const Projects = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid lg:grid-cols-2 gap-8 py-[100px] px-[100px]">
+        <div className="grid lg:grid-cols-2 gap-8 px-[100px] py-[250px]">
           {projects.map((project, index) => <motion.div key={index} className={`group bg-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 border border-border ${project.featured ? 'lg:col-span-1' : ''}`} initial={{
           opacity: 0,
           y: 50,

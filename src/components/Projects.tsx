@@ -1,4 +1,5 @@
 import { ExternalLink, Github, Star, Calendar, Users } from "lucide-react";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -45,34 +46,76 @@ const projects = [
 
 const Projects = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 relative overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-br from-background via-card to-muted relative overflow-hidden">
       {/* Enhanced Background Animation */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-300 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-300 rounded-full blur-3xl animate-float animate-delay-300"></div>
-        <div className="absolute top-2/3 left-1/2 w-64 h-64 bg-indigo-300 rounded-full blur-3xl animate-float animate-delay-600"></div>
+      <div className="absolute inset-0 opacity-20">
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl"
+          animate={{ y: [-20, 20, -20], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl"
+          animate={{ y: [20, -20, 20], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div 
+          className="absolute top-2/3 left-1/2 w-64 h-64 bg-accent rounded-full blur-3xl"
+          animate={{ y: [-15, 15, -15], opacity: [0.2, 0.5, 0.2] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.4 }}
+          viewport={{ margin: "-100px" }}
+        >
+          <motion.h2 
+            className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
             Featured Projects
-          </h2>
-          <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-blue-600 mx-auto mb-8 rounded-full animate-scale-in animate-delay-300"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in animate-delay-500">
+          </motion.h2>
+          <motion.div 
+            className="w-32 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-8 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: 128 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          />
+          <motion.p 
+            className="text-xl text-muted-foreground max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+          >
             Showcasing my journey through code - from security tools to full-stack applications
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         
         <div className="grid lg:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <div 
+            <motion.div 
               key={index} 
-              className={`group bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-4 hover:scale-105 hover:rotate-1 border border-gray-100 animate-scale-in ${
+              className={`group bg-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 border border-border ${
                 project.featured ? 'lg:col-span-1' : ''
               }`}
-              style={{ animationDelay: `${index * 200}ms` }}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -10,
+                rotateY: 5
+              }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ margin: "-50px" }}
             >
               {/* Project Image */}
               <div className="relative overflow-hidden h-64">
@@ -178,16 +221,26 @@ const Projects = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
         
         {/* More Projects Button */}
-        <div className="text-center mt-12 animate-fade-in animate-delay-800">
-          <button className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-500 hover:scale-110 hover:-translate-y-2 shadow-lg hover-lift">
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          viewport={{ margin: "-100px" }}
+        >
+          <motion.button 
+            className="bg-gradient-to-r from-primary to-secondary text-primary-foreground px-8 py-4 rounded-full font-semibold hover:scale-110 transition-all duration-300 shadow-lg"
+            whileHover={{ scale: 1.1, y: -5 }}
+            transition={{ duration: 0.2 }}
+          >
             View All Projects on GitHub
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );

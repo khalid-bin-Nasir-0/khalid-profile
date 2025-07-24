@@ -1,113 +1,221 @@
 
 import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-indigo-900 overflow-hidden">
+    <section className="relative py-20 bg-gradient-to-br from-muted via-card to-background overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl animate-float animate-delay-200"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-float animate-delay-600"></div>
+        <motion.div 
+          className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary rounded-full mix-blend-multiply filter blur-xl"
+          animate={{ y: [-20, 20, -20], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-secondary rounded-full mix-blend-multiply filter blur-xl"
+          animate={{ y: [20, -20, 20], opacity: [0.4, 0.7, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
       </div>
 
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent animate-text-shimmer">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.4 }}
+            viewport={{ margin: "-100px" }}
+          >
+            <motion.h2 
+              className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               Get In Touch
-            </h2>
-            <p className="text-xl text-gray-300 animate-slide-up animate-delay-300">
+            </motion.h2>
+            <motion.p 
+              className="text-xl text-muted-foreground"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               Let's collaborate on something amazing together
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Contact Info */}
-            <div className="space-y-8 animate-slide-up animate-delay-500">
-              <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl">
+            <motion.div 
+              className="space-y-8"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.02, x: 5 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              viewport={{ margin: "-50px" }}
+            >
+              <motion.div 
+                className="group bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-card transition-all duration-500"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
+                  <motion.div 
+                    className="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center"
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Mail className="w-6 h-6 text-primary-foreground" />
+                  </motion.div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">Email</h3>
-                    <p className="text-gray-300">mohammadkhalidbinnasir@gmail.com</p>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Email</h3>
+                    <p className="text-muted-foreground">mohammadkhalidbinnasir@gmail.com</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl animate-slide-up animate-delay-700">
+              <motion.div 
+                className="group bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-card transition-all duration-500"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+              >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-600 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
+                  <motion.div 
+                    className="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-full flex items-center justify-center"
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Phone className="w-6 h-6 text-primary-foreground" />
+                  </motion.div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">Phone</h3>
-                    <p className="text-gray-300">+91 9973910879</p>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Phone</h3>
+                    <p className="text-muted-foreground">+91 9973910879</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="group bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 hover:bg-white/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 hover:shadow-2xl animate-slide-up animate-delay-900">
+              <motion.div 
+                className="group bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-6 hover:bg-card transition-all duration-500"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3, delay: 0.4 }}
+              >
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-pink-400 to-red-600 rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
+                  <motion.div 
+                    className="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-full flex items-center justify-center"
+                    whileHover={{ rotate: 12, scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <MapPin className="w-6 h-6 text-primary-foreground" />
+                  </motion.div>
                   <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">Location</h3>
-                    <p className="text-gray-300">Motihari, India</p>
+                    <h3 className="text-lg font-semibold text-foreground mb-1">Location</h3>
+                    <p className="text-muted-foreground">Motihari, India</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="flex space-x-4 justify-center animate-slide-up animate-delay-1100">
-                <a href="#" className="group w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-500 hover:scale-125 hover:rotate-12 backdrop-blur-sm border border-white/30">
-                  <Github className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
-                </a>
-                <a href="#" className="group w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-500 hover:scale-125 hover:rotate-12 backdrop-blur-sm border border-white/30">
-                  <Linkedin className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
-                </a>
-                <a href="#" className="group w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-500 hover:scale-125 hover:rotate-12 backdrop-blur-sm border border-white/30">
-                  <Instagram className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
-                </a>
-              </div>
-            </div>
+              <motion.div 
+                className="flex space-x-4 justify-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+              >
+                <motion.a 
+                  href="#" 
+                  className="group w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center hover:bg-primary/30 transition-all duration-500 backdrop-blur-sm border border-primary/30"
+                  whileHover={{ scale: 1.25, rotate: 12 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Github className="w-6 h-6 text-foreground group-hover:scale-110 transition-transform duration-300" />
+                </motion.a>
+                <motion.a 
+                  href="#" 
+                  className="group w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center hover:bg-secondary/30 transition-all duration-500 backdrop-blur-sm border border-secondary/30"
+                  whileHover={{ scale: 1.25, rotate: 12 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Linkedin className="w-6 h-6 text-foreground group-hover:scale-110 transition-transform duration-300" />
+                </motion.a>
+                <motion.a 
+                  href="#" 
+                  className="group w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center hover:bg-accent/30 transition-all duration-500 backdrop-blur-sm border border-accent/30"
+                  whileHover={{ scale: 1.25, rotate: 12 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Instagram className="w-6 h-6 text-foreground group-hover:scale-110 transition-transform duration-300" />
+                </motion.a>
+              </motion.div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 hover:bg-white/15 transition-all duration-500 animate-scale-in animate-delay-600">
+            <motion.div 
+              className="bg-card/80 backdrop-blur-md border border-border rounded-3xl p-8 hover:bg-card transition-all duration-500"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              whileHover={{ scale: 1.02, x: -5 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              viewport={{ margin: "-50px" }}
+            >
               <form className="space-y-6">
-                <div className="animate-slide-up animate-delay-800">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.3 }}
+                >
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 hover:bg-white/20"
+                    className="w-full px-4 py-3 bg-background/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 hover:bg-background/80"
                   />
-                </div>
-                <div className="animate-slide-up animate-delay-1000">
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                >
                   <input
                     type="email"
                     placeholder="Your Email"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 hover:bg-white/20"
+                    className="w-full px-4 py-3 bg-background/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 hover:bg-background/80"
                   />
-                </div>
-                <div className="animate-slide-up animate-delay-1200">
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.5 }}
+                >
                   <textarea
                     rows={4}
                     placeholder="Your Message"
-                    className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-300 resize-none hover:bg-white/20"
+                    className="w-full px-4 py-3 bg-background/50 border border-border rounded-xl text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300 resize-none hover:bg-background/80"
                   ></textarea>
-                </div>
-                <div className="animate-scale-in animate-delay-1400">
-                  <button
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.6 }}
+                >
+                  <motion.button
                     type="submit"
-                    className="group w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-500 hover:scale-105 hover:-translate-y-1 transform shadow-xl flex items-center justify-center gap-2"
+                    className="group w-full bg-gradient-to-r from-primary to-secondary text-primary-foreground px-6 py-3 rounded-xl font-semibold transition-all duration-500 shadow-xl flex items-center justify-center gap-2"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <span>Send Message</span>
                     <Send className="w-5 h-5 group-hover:translate-x-2 group-hover:-translate-y-1 transition-transform duration-500" />
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

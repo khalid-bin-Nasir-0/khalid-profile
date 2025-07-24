@@ -77,29 +77,27 @@ const Skills = () => {
 
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.h2 
-              className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              viewport={{ margin: "-100px" }}
             >
+              <motion.h2 
+                className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
               Skills & Expertise
             </motion.h2>
-            <motion.p 
-              className="text-xl text-muted-foreground"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
+              <motion.p 
+                className="text-xl text-muted-foreground"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+              >
               Crafting secure and innovative digital solutions with cutting-edge technologies
             </motion.p>
           </motion.div>
@@ -108,28 +106,32 @@ const Skills = () => {
             {skillCategories.map((category, index) => (
               <motion.div
                 key={category.title}
-                className="group bg-card/50 backdrop-blur-md border border-border rounded-3xl p-8 shadow-2xl"
+                className="group bg-card/50 backdrop-blur-md border border-border rounded-3xl p-8 shadow-2xl hover:shadow-accent/20 transition-all duration-300"
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -10,
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3)"
+                }}
                 transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
+                  duration: 0.4, 
+                  delay: index * 0.05,
                   type: "spring",
                   stiffness: 100
                 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ margin: "-50px" }}
               >
                 <motion.div 
-                  className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg`}
+                  className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.1 + 0.3,
+                    duration: 0.4, 
+                    delay: index * 0.05 + 0.2,
                     type: "spring",
                     stiffness: 200
                   }}
-                  viewport={{ once: true }}
                 >
                   <div className="text-white">
                     {category.icon}
@@ -137,43 +139,40 @@ const Skills = () => {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-2xl font-bold text-foreground mb-4"
+                  className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
-                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.05 + 0.3 }}
                 >
                   {category.title}
                 </motion.h3>
                 
                 <div className="space-y-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skill}
-                      className="flex items-center space-x-2"
-                      initial={{ opacity: 0, x: -10 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ 
-                        duration: 0.4, 
-                        delay: index * 0.1 + 0.7 + skillIndex * 0.05
-                      }}
-                      viewport={{ once: true }}
-                    >
-                      <motion.div 
-                        className={`w-2 h-2 bg-gradient-to-r ${category.color} rounded-full`}
-                        initial={{ scale: 0 }}
-                        whileInView={{ scale: 1 }}
+                      <motion.div
+                        key={skill}
+                        className="flex items-center space-x-2 group-hover:translate-x-2 transition-transform duration-300"
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
                         transition={{ 
                           duration: 0.3, 
-                          delay: index * 0.1 + 0.8 + skillIndex * 0.05,
-                          type: "spring",
-                          stiffness: 300
+                          delay: index * 0.05 + 0.4 + skillIndex * 0.03
                         }}
-                        viewport={{ once: true }}
-                      />
-                      <span className="text-muted-foreground">
-                        {skill}
-                      </span>
+                      >
+                        <motion.div 
+                          className={`w-2 h-2 bg-gradient-to-r ${category.color} rounded-full group-hover:scale-150 transition-transform duration-300`}
+                          initial={{ scale: 0 }}
+                          whileInView={{ scale: 1 }}
+                          transition={{ 
+                            duration: 0.2, 
+                            delay: index * 0.05 + 0.5 + skillIndex * 0.03,
+                            type: "spring",
+                            stiffness: 300
+                          }}
+                        />
+                        <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                          {skill}
+                        </span>
                     </motion.div>
                   ))}
                 </div>
@@ -183,8 +182,7 @@ const Skills = () => {
                   className="mt-6 space-y-1"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 + 1.2 }}
-                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: index * 0.05 + 0.7 }}
                 >
                   <div className="flex justify-between text-sm text-muted-foreground">
                     <span>Proficiency</span>
@@ -192,15 +190,14 @@ const Skills = () => {
                   </div>
                   <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
                     <motion.div 
-                      className={`h-full bg-gradient-to-r ${category.color} rounded-full`}
+                      className={`h-full bg-gradient-to-r ${category.color} rounded-full group-hover:scale-x-100 transition-transform duration-300`}
                       initial={{ scaleX: 0 }}
                       whileInView={{ scaleX: 0.9 }}
                       transition={{ 
-                        duration: 1.5, 
-                        delay: index * 0.1 + 1.4,
+                        duration: 1.2, 
+                        delay: index * 0.05 + 0.8,
                         ease: "easeOut"
                       }}
-                      viewport={{ once: true }}
                       style={{ transformOrigin: "left" }}
                     />
                   </div>

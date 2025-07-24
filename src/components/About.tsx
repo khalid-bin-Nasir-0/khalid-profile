@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const About = () => {
   return (
     <section className="py-20 px-4 relative overflow-hidden">
-      {/* Enhanced visible background with moving code particles */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5">
+      {/* Enhanced visible background with moving code particles - contained within section */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5" style={{ zIndex: 0 }}>
         {/* Moving code elements - left to right */}
         <motion.div 
           className="absolute top-1/4 left-0 w-full h-20 opacity-30"

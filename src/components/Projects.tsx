@@ -134,8 +134,8 @@ const Projects = () => {
           </motion.p>
         </motion.div>
         
-        <div className="grid lg:grid-cols-2 gap-8 my-0 px-0 py-0">
-          {projects.map((project, index) => <motion.div key={index} className={`group bg-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700 border border-border ${project.featured ? 'lg:col-span-1' : ''}`} initial={{
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {projects.map((project, index) => <motion.div key={index} className="group bg-card rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-200 border border-border" initial={{
           opacity: 0,
           y: 50,
           scale: 0.9
@@ -154,9 +154,9 @@ const Projects = () => {
           margin: "-50px"
         }}>
               {/* Project Image */}
-              <div className="relative overflow-hidden h-64">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-3" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative overflow-hidden h-48">
+                <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-200 group-hover:scale-115 group-hover:rotate-2" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
                 
                 {/* Featured Badge */}
                 {project.featured && <div className="absolute top-4 left-4 flex items-center gap-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium animate-bounce">
@@ -165,68 +165,69 @@ const Projects = () => {
                   </div>}
                 
                 {/* Status Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:scale-110 ${project.stats.status === 'Active' ? 'bg-green-100 text-green-700 border border-green-200' : project.stats.status === 'Completed' ? 'bg-blue-100 text-blue-700 border border-blue-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200'}`}>
+                <div className="absolute top-3 right-3">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-150 hover:scale-110 ${project.stats.status === 'Active' ? 'bg-green-100 text-green-700 border border-green-200' : project.stats.status === 'Completed' ? 'bg-blue-100 text-blue-700 border border-blue-200' : 'bg-yellow-100 text-yellow-700 border border-yellow-200'}`}>
                     {project.stats.status}
                   </span>
                 </div>
                 
                 {/* Overlay Buttons */}
-                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  <a href={project.github} className="flex items-center gap-2 bg-white/90 backdrop-blur-sm text-gray-800 px-4 py-2 rounded-lg hover:bg-white transition-all duration-300 font-medium shadow-lg hover:scale-125 hover:-translate-y-2">
-                    <Github className="w-4 h-4" />
+                <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-all duration-200">
+                  <a href={project.github} className="flex items-center gap-1 bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-lg hover:bg-white transition-all duration-150 font-medium shadow-lg hover:scale-125 hover:-translate-y-2">
+                    <Github className="w-3 h-3" />
                     Code
                   </a>
-                  <a href={project.live} className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-300 font-medium shadow-lg hover:scale-125 hover:-translate-y-2">
-                    <ExternalLink className="w-4 h-4" />
+                  <a href={project.live} className="flex items-center gap-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-3 py-2 rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-150 font-medium shadow-lg hover:scale-125 hover:-translate-y-2">
+                    <ExternalLink className="w-3 h-3" />
                     Demo
                   </a>
                 </div>
               </div>
               
               {/* Project Content */}
-              <div className="p-8">
-                <div className="mb-4">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-500">
+              <div className="p-4">
+                <div className="mb-3">
+                  <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors duration-150">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed text-base group-hover:text-gray-800 transition-colors duration-300">
+                  <p className="text-muted-foreground leading-relaxed text-sm group-hover:text-foreground transition-colors duration-150 line-clamp-2">
                     {project.description}
                   </p>
                 </div>
                 
                 {/* Project Stats */}
-                <div className="flex items-center gap-6 mb-6 text-sm text-gray-500">
-                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-300">
-                    <Star className="w-4 h-4" />
+                <div className="flex items-center gap-4 mb-3 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-150">
+                    <Star className="w-3 h-3" />
                     <span>{project.stats.stars}</span>
                   </div>
-                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-300">
-                    <Users className="w-4 h-4" />
+                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-150">
+                    <Users className="w-3 h-3" />
                     <span>{project.stats.contributors}</span>
                   </div>
-                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-300">
-                    <Calendar className="w-4 h-4" />
+                  <div className="flex items-center gap-1 hover:scale-110 transition-transform duration-150">
+                    <Calendar className="w-3 h-3" />
                     <span>2024</span>
                   </div>
                 </div>
                 
                 {/* Tech Stack */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech.map((tech, techIndex) => <span key={techIndex} className="px-3 py-1 bg-gradient-to-r from-purple-50 to-blue-50 text-purple-700 text-sm rounded-full font-medium border border-purple-100 hover:from-purple-100 hover:to-blue-100 hover:scale-110 hover:rotate-2 transition-all duration-300">
+                <div className="flex flex-wrap gap-1 mb-3">
+                  {project.tech.slice(0, 3).map((tech, techIndex) => <span key={techIndex} className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-md font-medium border border-primary/20 hover:bg-primary/20 hover:scale-105 transition-all duration-150">
                       {tech}
                     </span>)}
+                  {project.tech.length > 3 && <span className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded-md">+{project.tech.length - 3}</span>}
                 </div>
                 
                 {/* Action Buttons */}
-                <div className="flex gap-3">
-                  <a href={project.github} className="flex-1 flex items-center justify-center gap-2 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-all duration-500 font-medium hover:scale-110 hover:-translate-y-1">
-                    <Github className="w-4 h-4" />
-                    View Code
+                <div className="flex gap-2">
+                  <a href={project.github} className="flex-1 flex items-center justify-center gap-1 py-2 bg-secondary/20 text-secondary rounded-lg hover:bg-secondary/30 transition-all duration-150 text-sm font-medium hover:scale-105 hover:-translate-y-1">
+                    <Github className="w-3 h-3" />
+                    Code
                   </a>
-                  <a href={project.live} className="flex-1 flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-500 font-medium hover:scale-110 hover:-translate-y-1">
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
+                  <a href={project.live} className="flex-1 flex items-center justify-center gap-1 py-2 bg-primary/20 text-primary rounded-lg hover:bg-primary/30 transition-all duration-150 text-sm font-medium hover:scale-105 hover:-translate-y-1">
+                    <ExternalLink className="w-3 h-3" />
+                    Demo
                   </a>
                 </div>
               </div>

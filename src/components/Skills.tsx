@@ -110,25 +110,26 @@ const Skills = () => {
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 whileHover={{ 
-                  scale: 1.05, 
-                  y: -10,
+                  scale: 1.08, 
+                  y: -15,
+                  rotate: 2,
                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3)"
                 }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: index * 0.05,
-                  type: "spring",
-                  stiffness: 100
-                }}
+              transition={{ 
+                duration: 0.15, 
+                delay: index * 0.02,
+                type: "spring",
+                stiffness: 100
+              }}
                 viewport={{ margin: "-50px" }}
               >
                 <motion.div 
-                  className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-12 transition-all duration-300`}
+                  className={`w-16 h-16 bg-gradient-to-br ${category.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-125 group-hover:rotate-18 transition-all duration-150`}
                   initial={{ scale: 0, rotate: -180 }}
                   whileInView={{ scale: 1, rotate: 0 }}
                   transition={{ 
-                    duration: 0.4, 
-                    delay: index * 0.05 + 0.2,
+                    duration: 0.15, 
+                    delay: index * 0.02 + 0.1,
                     type: "spring",
                     stiffness: 200
                   }}
@@ -139,10 +140,10 @@ const Skills = () => {
                 </motion.div>
                 
                 <motion.h3 
-                  className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300"
+                  className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-150"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 + 0.3 }}
+                  transition={{ duration: 0.15, delay: index * 0.02 + 0.15 }}
                 >
                   {category.title}
                 </motion.h3>
@@ -151,26 +152,26 @@ const Skills = () => {
                   {category.skills.map((skill, skillIndex) => (
                       <motion.div
                         key={skill}
-                        className="flex items-center space-x-2 group-hover:translate-x-2 transition-transform duration-300"
+                        className="flex items-center space-x-2 group-hover:translate-x-3 hover:scale-105 transition-all duration-150"
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ 
-                          duration: 0.3, 
-                          delay: index * 0.05 + 0.4 + skillIndex * 0.03
+                          duration: 0.15, 
+                          delay: index * 0.02 + 0.2 + skillIndex * 0.01
                         }}
                       >
                         <motion.div 
-                          className={`w-2 h-2 bg-gradient-to-r ${category.color} rounded-full group-hover:scale-150 transition-transform duration-300`}
+                          className={`w-2 h-2 bg-gradient-to-r ${category.color} rounded-full group-hover:scale-200 transition-transform duration-150`}
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           transition={{ 
-                            duration: 0.2, 
-                            delay: index * 0.05 + 0.5 + skillIndex * 0.03,
+                            duration: 0.1, 
+                            delay: index * 0.02 + 0.25 + skillIndex * 0.01,
                             type: "spring",
                             stiffness: 300
                           }}
                         />
-                        <span className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                        <span className="text-muted-foreground group-hover:text-foreground hover:scale-105 transition-all duration-150">
                           {skill}
                         </span>
                     </motion.div>

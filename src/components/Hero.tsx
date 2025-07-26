@@ -14,7 +14,7 @@ const Hero = () => {
       
       {/* Fixed Navigation Bar */}
       <motion.div 
-        className="fixed top-6 right-6 z-50 flex space-x-3"
+        className="fixed top-3 right-6 z-50 flex space-x-3 backdrop-blur-md bg-background/20 rounded-2xl p-3 border border-border/20"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}

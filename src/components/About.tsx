@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const About = () => {
   return (
-    <section className="py-20 px-4 relative overflow-hidden">
+    <section id="about" className="py-20 px-4 relative overflow-hidden">
         {/* Clean background without code animation */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/3 to-accent/5" style={{ zIndex: 0 }}>
 

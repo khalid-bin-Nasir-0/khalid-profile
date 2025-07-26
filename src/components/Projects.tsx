@@ -54,7 +54,7 @@ const projects = [{
   }
 }];
 const Projects = () => {
-  return <section className="py-20 px-4 bg-gradient-to-br from-background via-card to-muted relative overflow-hidden">
+  return <section id="projects" className="py-20 px-4 bg-gradient-to-br from-background via-card to-muted relative overflow-hidden">
       {/* Enhanced Background Animation */}
       <div className="absolute inset-0 opacity-20">
         <motion.div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" animate={{

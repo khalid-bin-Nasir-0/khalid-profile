@@ -55,7 +55,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-background via-card to-muted overflow-hidden">
+    <section id="skills" className="relative py-20 bg-gradient-to-br from-background via-card to-muted overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
         <motion.div 

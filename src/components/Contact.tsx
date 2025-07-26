@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Contact = () => {
   return (
-    <section className="relative py-20 bg-gradient-to-br from-muted via-card to-background overflow-hidden">
+    <section id="contact" className="relative py-20 bg-gradient-to-br from-muted via-card to-background overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
         <motion.div 

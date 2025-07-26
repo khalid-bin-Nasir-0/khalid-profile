@@ -10,11 +10,11 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
       {/* Fixed Navigation Bar */}
       <motion.div 
-        className="fixed top-6 right-6 z-50 flex space-x-3"
+        className="fixed top-3 left-1/2 transform -translate-x-1/2 z-50 flex space-x-3"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}

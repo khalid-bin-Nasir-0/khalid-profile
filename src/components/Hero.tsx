@@ -1,9 +1,69 @@
-import { Github, Linkedin, Mail, Download, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ExternalLink, Home, User, CheckCircle, Bell, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
+      
+      {/* Fixed Navigation Bar */}
+      <motion.div 
+        className="fixed top-6 right-6 z-50 flex space-x-3"
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <motion.button
+          onClick={() => scrollToSection('home')}
+          className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/30 transition-all duration-200"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Home className="w-5 h-5 text-primary" />
+        </motion.button>
+        
+        <motion.button
+          onClick={() => scrollToSection('about')}
+          className="w-12 h-12 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center hover:bg-secondary/30 transition-all duration-200"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <User className="w-5 h-5 text-secondary" />
+        </motion.button>
+        
+        <motion.button
+          onClick={() => scrollToSection('skills')}
+          className="w-12 h-12 rounded-full bg-accent/20 backdrop-blur-sm border border-accent/30 flex items-center justify-center hover:bg-accent/30 transition-all duration-200"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <CheckCircle className="w-5 h-5 text-accent" />
+        </motion.button>
+        
+        <motion.button
+          onClick={() => scrollToSection('projects')}
+          className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/30 transition-all duration-200"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Bell className="w-5 h-5 text-primary" />
+        </motion.button>
+        
+        <motion.button
+          onClick={() => scrollToSection('contact')}
+          className="w-12 h-12 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center hover:bg-secondary/30 transition-all duration-200"
+          whileHover={{ scale: 1.1, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <MessageCircle className="w-5 h-5 text-secondary" />
+        </motion.button>
+      </motion.div>
       
       {/* Background Code Animation - Only in Hero Section */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">

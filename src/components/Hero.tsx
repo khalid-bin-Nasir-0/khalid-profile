@@ -6,30 +6,46 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
       {/* Background Code Animation - Only in Hero Section */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+      <div className="absolute inset-0 opacity-30 pointer-events-none">
         {/* Moving code snippets behind profile */}
         <motion.div 
-          className="absolute top-1/4 left-0 w-full text-primary/40 font-mono text-xs whitespace-nowrap"
-          animate={{ x: [-200, window.innerWidth + 200] }}
+          className="absolute top-1/6 left-0 w-full text-primary/60 font-mono text-xl whitespace-nowrap"
+          animate={{ x: [-300, window.innerWidth + 300] }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         >
           {"const hero = { name: 'Mohammad Khalid', role: 'Developer', passion: 'Security' };"}
         </motion.div>
         
         <motion.div 
-          className="absolute top-1/2 right-0 w-full text-secondary/40 font-mono text-xs whitespace-nowrap text-right"
-          animate={{ x: [window.innerWidth + 200, -200] }}
+          className="absolute top-1/3 right-0 w-full text-secondary/60 font-mono text-lg whitespace-nowrap text-right"
+          animate={{ x: [window.innerWidth + 300, -300] }}
           transition={{ duration: 25, repeat: Infinity, ease: "linear", delay: 3 }}
         >
           {"function buildFuture() { return innovation + dedication + code; }"}
         </motion.div>
         
         <motion.div 
-          className="absolute top-3/4 left-0 w-full text-accent/40 font-mono text-xs whitespace-nowrap"
-          animate={{ x: [-200, window.innerWidth + 200] }}
+          className="absolute top-1/2 left-0 w-full text-accent/60 font-mono text-base whitespace-nowrap"
+          animate={{ x: [-300, window.innerWidth + 300] }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear", delay: 7 }}
         >
           {"while(learning) { skills++; experience++; impact++; }"}
+        </motion.div>
+
+        <motion.div 
+          className="absolute top-2/3 right-0 w-full text-primary/50 font-mono text-lg whitespace-nowrap text-right"
+          animate={{ x: [window.innerWidth + 300, -300] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear", delay: 5 }}
+        >
+          {"if (challenge) { solveProblem(); deploySecure(); optimizeCode(); }"}
+        </motion.div>
+
+        <motion.div 
+          className="absolute top-5/6 left-0 w-full text-secondary/50 font-mono text-xl whitespace-nowrap"
+          animate={{ x: [-300, window.innerWidth + 300] }}
+          transition={{ duration: 19, repeat: Infinity, ease: "linear", delay: 9 }}
+        >
+          {"console.log('Building tomorrow\\'s solutions today');"}
         </motion.div>
 
         {/* Floating elements */}

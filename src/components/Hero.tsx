@@ -1,6 +1,9 @@
-import { Github, Linkedin, Mail, Download, ExternalLink, Home, User, CheckCircle, Bell, MessageCircle } from "lucide-react";
-import { motion } from "framer-motion";
+import { Github, Linkedin, Mail, Download, ExternalLink, Home, User, CheckCircle, Bell, MessageCircle, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 const Hero = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -8,64 +11,118 @@ const Hero = () => {
         behavior: 'smooth'
       });
     }
+    setIsMenuOpen(false); // Close menu after navigation
   };
+
+  const navigationItems = [
+    { id: 'home', icon: Home, label: 'Home', color: 'primary' },
+    { id: 'about', icon: User, label: 'About', color: 'secondary' },
+    { id: 'skills', icon: CheckCircle, label: 'Skills', color: 'accent' },
+    { id: 'projects', icon: Bell, label: 'Projects', color: 'primary' },
+    { id: 'contact', icon: MessageCircle, label: 'Contact', color: 'secondary' }
+  ];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
-      {/* Fixed Navigation Bar */}
-      <motion.div initial={{
-      opacity: 0,
-      x: 50
-    }} animate={{
-      opacity: 1,
-      x: 0
-    }} transition={{
-      duration: 0.6,
-      delay: 0.5
-    }} className="fixed top-6 right-6 z-50 flex space-x-3 mx-0 my-0 py-[0.1px]">
-        <motion.button onClick={() => scrollToSection('home')} className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/30 transition-all duration-200" whileHover={{
-        scale: 1.1,
-        y: -2
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <Home className="w-5 h-5 text-primary" />
+      {/* Desktop Navigation - Top Center */}
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
+      >
+        <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-4 py-2 shadow-lg">
+          {navigationItems.map((item) => (
+            <motion.button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`group relative w-12 h-12 rounded-full bg-${item.color}/20 backdrop-blur-sm border border-${item.color}/30 flex items-center justify-center hover:bg-${item.color}/30 transition-all duration-200`}
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <item.icon className={`w-5 h-5 text-${item.color}`} />
+              
+              {/* Tooltip */}
+              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md text-sm whitespace-nowrap shadow-lg border">
+                  {item.label}
+                </div>
+              </div>
+            </motion.button>
+          ))}
+        </div>
+      </motion.nav>
+
+      {/* Mobile Navigation - Hamburger Menu */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="fixed top-6 right-6 z-50 md:hidden"
+      >
+        {/* Hamburger Button */}
+        <motion.button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="w-14 h-14 rounded-full bg-background/80 backdrop-blur-lg border border-border/50 flex items-center justify-center shadow-lg"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <AnimatePresence mode="wait">
+            {isMenuOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X className="w-6 h-6 text-foreground" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu className="w-6 h-6 text-foreground" />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.button>
-        
-        <motion.button onClick={() => scrollToSection('about')} className="w-12 h-12 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center hover:bg-secondary/30 transition-all duration-200" whileHover={{
-        scale: 1.1,
-        y: -2
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <User className="w-5 h-5 text-secondary" />
-        </motion.button>
-        
-        <motion.button onClick={() => scrollToSection('skills')} className="w-12 h-12 rounded-full bg-accent/20 backdrop-blur-sm border border-accent/30 flex items-center justify-center hover:bg-accent/30 transition-all duration-200" whileHover={{
-        scale: 1.1,
-        y: -2
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <CheckCircle className="w-5 h-5 text-accent" />
-        </motion.button>
-        
-        <motion.button onClick={() => scrollToSection('projects')} className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center hover:bg-primary/30 transition-all duration-200" whileHover={{
-        scale: 1.1,
-        y: -2
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <Bell className="w-5 h-5 text-primary" />
-        </motion.button>
-        
-        <motion.button onClick={() => scrollToSection('contact')} className="w-12 h-12 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center hover:bg-secondary/30 transition-all duration-200" whileHover={{
-        scale: 1.1,
-        y: -2
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <MessageCircle className="w-5 h-5 text-secondary" />
-        </motion.button>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-16 right-0 bg-background/95 backdrop-blur-lg border border-border/50 rounded-2xl p-4 shadow-xl min-w-[200px]"
+            >
+              <div className="space-y-2">
+                {navigationItems.map((item, index) => (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-${item.color}/10 hover:bg-${item.color}/20 transition-all duration-200 text-left group`}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.05 }}
+                    whileHover={{ scale: 1.02, x: 4 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <item.icon className={`w-5 h-5 text-${item.color} group-hover:scale-110 transition-transform duration-200`} />
+                    <span className="font-medium text-foreground group-hover:text-${item.color} transition-colors duration-200">
+                      {item.label}
+                    </span>
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
       
       {/* Background Code Animation - Only in Hero Section */}

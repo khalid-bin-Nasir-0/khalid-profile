@@ -28,18 +28,18 @@ const Hero = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
+        className="fixed top-1 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
       >
-        <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-4 py-2 shadow-lg">
+        <div className="flex space-x-1 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-2 py-1 shadow-lg">
           {navigationItems.map((item) => (
             <motion.button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`group relative w-12 h-12 rounded-full bg-${item.color}/20 backdrop-blur-sm border border-${item.color}/30 flex items-center justify-center hover:bg-${item.color}/30 transition-all duration-200`}
+              className={`group relative w-8 h-8 rounded-full bg-${item.color}/20 backdrop-blur-sm border border-${item.color}/30 flex items-center justify-center hover:bg-${item.color}/30 transition-all duration-200`}
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
-              <item.icon className={`w-5 h-5 text-${item.color}`} />
+              <item.icon className={`w-3 h-3 text-${item.color}`} />
               
               {/* Tooltip */}
               <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
@@ -57,12 +57,12 @@ const Hero = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed top-4 right-4 z-50 md:hidden"
+        className="fixed top-1 right-2 z-50 md:hidden"
       >
         {/* Hamburger Button */}
         <motion.button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="w-14 h-14 rounded-full bg-background/80 backdrop-blur-lg border border-border/50 flex items-center justify-center shadow-lg"
+          className="w-10 h-10 rounded-full bg-background/80 backdrop-blur-lg border border-border/50 flex items-center justify-center shadow-lg"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -75,7 +75,7 @@ const Hero = () => {
                 exit={{ rotate: 90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <X className="w-6 h-6 text-foreground" />
+                <X className="w-4 h-4 text-foreground" />
               </motion.div>
             ) : (
               <motion.div
@@ -85,7 +85,7 @@ const Hero = () => {
                 exit={{ rotate: -90, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               >
-                <Menu className="w-6 h-6 text-foreground" />
+                <Menu className="w-4 h-4 text-foreground" />
               </motion.div>
             )}
           </AnimatePresence>

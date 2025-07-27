@@ -28,7 +28,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
       >
         <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-4 py-2 shadow-lg">
           {navigationItems.map((item) => (
@@ -57,7 +57,7 @@ const Hero = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed top-6 right-6 z-50 md:hidden"
+        className="fixed top-4 right-4 z-50 md:hidden"
       >
         {/* Hamburger Button */}
         <motion.button

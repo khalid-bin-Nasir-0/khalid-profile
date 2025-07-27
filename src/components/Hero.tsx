@@ -80,7 +80,7 @@ const Hero = () => {
     }} transition={{
       duration: 0.6,
       delay: 0.5
-    }} className="fixed top-1 right-2 z-50 md:hidden my-[7px]">
+    }} className="fixed top-1 right-2 z-50 md:hidden px-[2px] my-[7.5px]">
         {/* Hamburger Button */}
         <motion.button onClick={() => setIsMenuOpen(!isMenuOpen)} className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-lg border border-border/50 flex items-center justify-center shadow-lg" whileHover={{
         scale: 1.05

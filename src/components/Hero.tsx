@@ -23,12 +23,12 @@ const Hero = () => {
   ];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
-      {/* Desktop Navigation - Below Header */}
+      {/* Desktop Navigation - Top Center */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
-        className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-32 z-50 hidden md:flex"
+        className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex"
       >
         <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-4 py-2 shadow-lg">
           {navigationItems.map((item) => (

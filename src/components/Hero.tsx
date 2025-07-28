@@ -40,7 +40,7 @@ const Hero = () => {
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
-      {/* Desktop Navigation - Top Center */}
+      {/* Desktop Navigation - Top Right */}
       <motion.nav initial={{
       opacity: 0,
       y: -20
@@ -50,7 +50,7 @@ const Hero = () => {
     }} transition={{
       duration: 0.6,
       delay: 0.5
-    }} className="fixed top-1 left-1/2 transform -translate-x-1/2 z-50 hidden md:flex">
+    }} className="fixed top-1 right-4 z-50 hidden md:flex">
         <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-3 py-2 shadow-lg">
           {navigationItems.map(item => <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`group relative w-12 h-12 rounded-full bg-${item.color}/20 backdrop-blur-sm border border-${item.color}/30 flex items-center justify-center hover:bg-${item.color}/30 transition-all duration-200`} whileHover={{
           scale: 1.1,

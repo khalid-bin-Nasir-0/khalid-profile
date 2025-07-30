@@ -52,21 +52,52 @@ const Hero = () => {
       delay: 0.5
     }} className="fixed top-1 right-4 z-50 hidden md:flex">
         <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-3 py-2 shadow-lg">
-          {navigationItems.map(item => <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`group relative w-12 h-12 rounded-full bg-${item.color}/20 backdrop-blur-sm border border-${item.color}/30 flex items-center justify-center hover:bg-${item.color}/30 transition-all duration-200`} whileHover={{
-          scale: 1.1,
-          y: -2
-        }} whileTap={{
-          scale: 0.95
-        }}>
-              <item.icon className={`w-5 h-5 text-${item.color}`} />
-              
-              {/* Tooltip */}
-              <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md text-sm whitespace-nowrap shadow-lg border">
-                  {item.label}
+          {navigationItems.map(item => {
+            const getItemStyles = (color: string) => {
+              switch(color) {
+                case 'primary':
+                  return {
+                    bg: 'bg-primary/20 hover:bg-primary/30 border-primary/30',
+                    text: 'text-primary'
+                  };
+                case 'secondary':
+                  return {
+                    bg: 'bg-secondary/20 hover:bg-secondary/30 border-secondary/30',
+                    text: 'text-secondary'
+                  };
+                case 'accent':
+                  return {
+                    bg: 'bg-accent/20 hover:bg-accent/30 border-accent/30',
+                    text: 'text-accent'
+                  };
+                default:
+                  return {
+                    bg: 'bg-primary/20 hover:bg-primary/30 border-primary/30',
+                    text: 'text-primary'
+                  };
+              }
+            };
+            
+            const styles = getItemStyles(item.color);
+            
+            return (
+              <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`group relative w-12 h-12 rounded-full ${styles.bg} backdrop-blur-sm border flex items-center justify-center transition-all duration-200`} whileHover={{
+                scale: 1.1,
+                y: -2
+              }} whileTap={{
+                scale: 0.95
+              }}>
+                <item.icon className={`w-5 h-5 ${styles.text}`} />
+                
+                {/* Tooltip */}
+                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md text-sm whitespace-nowrap shadow-lg border">
+                    {item.label}
+                  </div>
                 </div>
-              </div>
-            </motion.button>)}
+              </motion.button>
+            );
+          })}
         </div>
       </motion.nav>
 
@@ -136,26 +167,61 @@ const Hero = () => {
           duration: 0.2
         }} className="absolute top-16 right-0 bg-background/95 backdrop-blur-lg border border-border/50 rounded-2xl p-4 shadow-xl min-w-[200px]">
               <div className="space-y-2">
-                {navigationItems.map((item, index) => <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl bg-${item.color}/10 hover:bg-${item.color}/20 transition-all duration-200 text-left group`} initial={{
-              opacity: 0,
-              x: 20
-            }} animate={{
-              opacity: 1,
-              x: 0
-            }} transition={{
-              duration: 0.2,
-              delay: index * 0.05
-            }} whileHover={{
-              scale: 1.02,
-              x: 4
-            }} whileTap={{
-              scale: 0.98
-            }}>
-                    <item.icon className={`w-5 h-5 text-${item.color} group-hover:scale-110 transition-transform duration-200`} />
-                    <span className="font-medium text-foreground group-hover:text-${item.color} transition-colors duration-200">
-                      {item.label}
-                    </span>
-                  </motion.button>)}
+                {navigationItems.map((item, index) => {
+                  const getMobileStyles = (color: string) => {
+                    switch(color) {
+                      case 'primary':
+                        return {
+                          bg: 'bg-primary/10 hover:bg-primary/20',
+                          text: 'text-primary',
+                          hoverText: 'group-hover:text-primary'
+                        };
+                      case 'secondary':
+                        return {
+                          bg: 'bg-secondary/10 hover:bg-secondary/20',
+                          text: 'text-secondary',
+                          hoverText: 'group-hover:text-secondary'
+                        };
+                      case 'accent':
+                        return {
+                          bg: 'bg-accent/10 hover:bg-accent/20',
+                          text: 'text-accent',
+                          hoverText: 'group-hover:text-accent'
+                        };
+                      default:
+                        return {
+                          bg: 'bg-primary/10 hover:bg-primary/20',
+                          text: 'text-primary',
+                          hoverText: 'group-hover:text-primary'
+                        };
+                    }
+                  };
+                  
+                  const mobileStyles = getMobileStyles(item.color);
+                  
+                  return (
+                    <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl ${mobileStyles.bg} transition-all duration-200 text-left group`} initial={{
+                      opacity: 0,
+                      x: 20
+                    }} animate={{
+                      opacity: 1,
+                      x: 0
+                    }} transition={{
+                      duration: 0.2,
+                      delay: index * 0.05
+                    }} whileHover={{
+                      scale: 1.02,
+                      x: 4
+                    }} whileTap={{
+                      scale: 0.98
+                    }}>
+                      <item.icon className={`w-5 h-5 ${mobileStyles.text} group-hover:scale-110 transition-transform duration-200`} />
+                      <span className={`font-medium text-foreground ${mobileStyles.hoverText} transition-colors duration-200`}>
+                        {item.label}
+                      </span>
+                    </motion.button>
+                  );
+                })}
               </div>
             </motion.div>}
         </AnimatePresence>

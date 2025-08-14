@@ -30,6 +30,21 @@ export const useContactForm = () => {
         throw error;
       }
 
+      // Send email notification
+      try {
+        await supabase.functions.invoke('send-contact-notification', {
+          body: {
+            name: data.name.trim(),
+            email: data.email.trim(),
+            message: data.message.trim(),
+          }
+        });
+        console.log('Email notification sent successfully');
+      } catch (emailError) {
+        console.error('Failed to send email notification:', emailError);
+        // Don't fail the entire operation if email fails
+      }
+
       toast({
         title: "Message Sent!",
         description: "Thank you for your message. I'll get back to you soon!",

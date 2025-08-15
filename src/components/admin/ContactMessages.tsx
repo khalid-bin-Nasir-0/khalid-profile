@@ -3,9 +3,9 @@ import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/components/ui/use-toast';
+import { useAuth } from '@/contexts/AuthContext';
 import { Mail, Calendar, User, MessageSquare, Eye, EyeOff } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -22,6 +22,7 @@ export const ContactMessages = () => {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+  const { signOut } = useAuth();
 
   useEffect(() => {
     fetchMessages();
@@ -127,18 +128,27 @@ export const ContactMessages = () => {
 
   const unreadCount = messages.filter(msg => !msg.read).length;
 
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <div className="container mx-auto px-6 py-8">
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">Contact Messages</h1>
-        <div className="flex items-center gap-4">
-          <Badge variant="secondary" className="text-lg px-3 py-1">
-            Total: {messages.length}
-          </Badge>
-          <Badge variant={unreadCount > 0 ? "destructive" : "default"} className="text-lg px-3 py-1">
-            Unread: {unreadCount}
-          </Badge>
+      <div className="mb-8 flex justify-between items-start">
+        <div>
+          <h1 className="text-4xl font-bold mb-4">Admin Panel</h1>
+          <div className="flex items-center gap-4">
+            <Badge variant="secondary" className="text-lg px-3 py-1">
+              Total: {messages.length}
+            </Badge>
+            <Badge variant={unreadCount > 0 ? "destructive" : "default"} className="text-lg px-3 py-1">
+              Unread: {unreadCount}
+            </Badge>
+          </div>
         </div>
+        <Button onClick={handleSignOut} variant="outline">
+          Sign Out
+        </Button>
       </div>
 
       <ScrollArea className="h-[calc(100vh-200px)]">

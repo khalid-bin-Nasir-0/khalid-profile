@@ -1,10 +1,11 @@
 import { ContactMessages } from '@/components/admin/ContactMessages';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 const Admin = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <ProtectedRoute requireAdmin={true}>
       <ContactMessages />
-    </div>
+    </ProtectedRoute>
   );
 };
 

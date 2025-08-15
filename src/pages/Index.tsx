@@ -3,7 +3,6 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-import AdminAccess from "@/components/AdminAccess";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
 const Index = () => {
@@ -81,8 +80,6 @@ const Index = () => {
           <Contact />
         </motion.div>
       </div>
-      
-      <AdminAccess />
     </div>;
 };
 export default Index;

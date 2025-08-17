@@ -24,19 +24,34 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { name, email, message }: ContactNotificationRequest = await req.json();
 
-    console.log("Sending contact notification for:", { name, email });
+    // Sanitize inputs to prevent XSS
+    const sanitizeHtml = (str: string): string => {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .replace(/\//g, '&#x2F;');
+    };
+
+    const sanitizedName = sanitizeHtml(name.trim());
+    const sanitizedEmail = sanitizeHtml(email.trim());
+    const sanitizedMessage = sanitizeHtml(message.trim()).replace(/\n/g, '<br>');
+
+    console.log("Sending contact notification for:", { name: sanitizedName, email: sanitizedEmail });
 
     const emailResponse = await resend.emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: ["mohammadkhalidbinnasir@gmail.com"],
-      subject: `New Contact Message from ${name}`,
+      subject: `New Contact Message from ${sanitizedName}`,
       html: `
         <h2>New Contact Message Received</h2>
-        <p><strong>From:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>From:</strong> ${sanitizedName}</p>
+        <p><strong>Email:</strong> ${sanitizedEmail}</p>
         <p><strong>Message:</strong></p>
         <div style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; margin: 10px 0;">
-          ${message.replace(/\n/g, '<br>')}
+          ${sanitizedMessage}
         </div>
         <p><em>This message was sent through your portfolio contact form.</em></p>
       `,

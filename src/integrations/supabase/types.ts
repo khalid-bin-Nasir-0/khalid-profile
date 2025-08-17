@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_form_rate_limit: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          ip_address: unknown
+          last_submission: string | null
+          submission_count: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          ip_address: unknown
+          last_submission?: string | null
+          submission_count?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          ip_address?: unknown
+          last_submission?: string | null
+          submission_count?: number | null
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -94,6 +121,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      create_admin_user: {
+        Args: { _user_id: string }
+        Returns: boolean
+      }
       get_current_user_role: {
         Args: Record<PropertyKey, never>
         Returns: Database["public"]["Enums"]["app_role"]

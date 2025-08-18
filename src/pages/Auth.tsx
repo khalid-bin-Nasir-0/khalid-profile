@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/components/ui/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { AlertTriangle, Check, X } from 'lucide-react';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,26 @@ const Auth = () => {
   const { signIn, signUp, user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Password validation state
+  const [passwordValidation, setPasswordValidation] = useState({
+    length: false,
+    hasLetter: false,
+    hasNumber: false,
+    hasSymbol: false
+  });
+
+  // Validate password strength
+  const validatePassword = (pwd: string) => {
+    setPasswordValidation({
+      length: pwd.length >= 8,
+      hasLetter: /[a-zA-Z]/.test(pwd),
+      hasNumber: /\d/.test(pwd),
+      hasSymbol: /[!@#$%^&*(),.?":{}|<>]/.test(pwd)
+    });
+  };
+
+  const isPasswordStrong = Object.values(passwordValidation).every(Boolean);
 
   useEffect(() => {
     if (user) {
@@ -47,6 +68,17 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check password strength before proceeding
+    if (!isPasswordStrong) {
+      toast({
+        title: "Weak Password",
+        description: "Please meet all password requirements before signing up.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     const { error } = await signUp(email, password);
@@ -133,9 +165,37 @@ const Auth = () => {
                     type="password"
                     placeholder="Create a password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      validatePassword(e.target.value);
+                    }}
                     required
                   />
+                  
+                  {/* Password strength indicator */}
+                  {password && (
+                    <div className="text-sm space-y-1 mt-2">
+                      <p className="text-muted-foreground font-medium">Password requirements:</p>
+                      <div className="space-y-1">
+                        <div className={`flex items-center gap-2 ${passwordValidation.length ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          {passwordValidation.length ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                          <span>At least 8 characters</span>
+                        </div>
+                        <div className={`flex items-center gap-2 ${passwordValidation.hasLetter ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          {passwordValidation.hasLetter ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                          <span>Contains letters</span>
+                        </div>
+                        <div className={`flex items-center gap-2 ${passwordValidation.hasNumber ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          {passwordValidation.hasNumber ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                          <span>Contains numbers</span>
+                        </div>
+                        <div className={`flex items-center gap-2 ${passwordValidation.hasSymbol ? 'text-green-600' : 'text-muted-foreground'}`}>
+                          {passwordValidation.hasSymbol ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                          <span>Contains symbols (!@#$%^&*)</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? 'Creating account...' : 'Sign Up'}

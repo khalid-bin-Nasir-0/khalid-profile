@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { ContactMessages } from '@/components/admin/ContactMessages';
 import AdminBootstrap from '@/components/admin/AdminBootstrap';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useAuth } from '@/contexts/AuthContext';
@@ -56,7 +55,12 @@ const Admin = () => {
   // Normal admin panel with protection
   return (
     <ProtectedRoute requireAdmin={true}>
-      <ContactMessages />
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-primary mb-4">Admin Panel</h1>
+          <p className="text-muted-foreground">Welcome to the admin dashboard</p>
+        </div>
+      </div>
     </ProtectedRoute>
   );
 };

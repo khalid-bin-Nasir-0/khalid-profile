@@ -1,4 +1,4 @@
-import { Github, Linkedin, Mail, Download, ExternalLink, Home, User, CheckCircle, Bell, MessageCircle, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, Download, ExternalLink, Home, User, CheckCircle, Bell, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 const Hero = () => {
@@ -32,11 +32,6 @@ const Hero = () => {
     icon: Bell,
     label: 'Projects',
     color: 'primary'
-  }, {
-    id: 'contact',
-    icon: MessageCircle,
-    label: 'Contact',
-    color: 'secondary'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       

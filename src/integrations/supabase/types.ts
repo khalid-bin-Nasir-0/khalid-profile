@@ -14,63 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      contact_form_rate_limit: {
-        Row: {
-          created_at: string | null
-          email: string
-          id: string
-          ip_address: unknown
-          last_submission: string | null
-          submission_count: number | null
-        }
-        Insert: {
-          created_at?: string | null
-          email: string
-          id?: string
-          ip_address: unknown
-          last_submission?: string | null
-          submission_count?: number | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string
-          id?: string
-          ip_address?: unknown
-          last_submission?: string | null
-          submission_count?: number | null
-        }
-        Relationships: []
-      }
-      contact_messages: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          message: string
-          name: string
-          read: boolean
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          message: string
-          name: string
-          read?: boolean
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          message?: string
-          name?: string
-          read?: boolean
-          updated_at?: string
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           created_at: string

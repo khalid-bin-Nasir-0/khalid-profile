@@ -32,6 +32,11 @@ const Hero = () => {
     icon: Bell,
     label: 'Projects',
     color: 'primary'
+  }, {
+    id: 'contact',
+    icon: Mail,
+    label: 'Contact',
+    color: 'secondary'
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       

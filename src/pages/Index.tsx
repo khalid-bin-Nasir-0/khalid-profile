@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -68,6 +69,16 @@ const Index = () => {
           viewport={{ margin: "-100px" }}
         >
           <Projects />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          viewport={{ margin: "-100px" }}
+        >
+          <Contact />
         </motion.div>
         
       </div>

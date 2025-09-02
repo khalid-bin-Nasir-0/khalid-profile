@@ -145,8 +145,8 @@ class ContactForm {
         created_at: new Date().toISOString()
       };
 
-      // Submit to Supabase
-      const response = await this.submitToSupabase(data);
+      // Submit to secure endpoint
+      const response = await this.submitToSecureEndpoint(data);
       
       if (response.error) {
         throw new Error(response.error.message);
@@ -173,22 +173,24 @@ class ContactForm {
     }
   }
 
-  async submitToSupabase(data) {
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/contacts`, {
+  async submitToSecureEndpoint(data) {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/secure-contact`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-        'Prefer': 'return=representation'
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        message: data.message
+      })
     });
 
     const result = await response.json();
     
     if (!response.ok) {
-      throw new Error(result.message || 'Failed to submit form');
+      throw new Error(result.error || 'Failed to submit form');
     }
 
     return { data: result, error: null };

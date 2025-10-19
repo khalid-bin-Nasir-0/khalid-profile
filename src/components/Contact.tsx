@@ -6,6 +6,22 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters"),
+  email: z.string()
+    .trim()
+    .email("Invalid email address")
+    .max(255, "Email must be less than 255 characters"),
+  message: z.string()
+    .trim()
+    .min(10, "Message must be at least 10 characters")
+    .max(1000, "Message must be less than 1000 characters")
+});
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,13 +37,16 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Validate form data
+      const validatedData = contactSchema.parse(formData);
+
       const { error } = await supabase
         .from('messages')
         .insert([
           {
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            message: formData.message.trim(),
+            name: validatedData.name,
+            email: validatedData.email,
+            message: validatedData.message,
           }
         ]);
 
@@ -42,12 +61,22 @@ const Contact = () => {
 
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('Error submitting message:', error);
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
+      if (error instanceof z.ZodError) {
+        // Display validation errors
+        const firstError = error.errors[0];
+        toast({
+          title: "Validation Error",
+          description: firstError.message,
+          variant: "destructive",
+        });
+      } else {
+        console.error('Error submitting message:', error);
+        toast({
+          title: "Error",
+          description: "Failed to send message. Please try again.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }

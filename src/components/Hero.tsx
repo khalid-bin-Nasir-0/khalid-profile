@@ -40,190 +40,104 @@ const Hero = () => {
   }];
   return <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-muted to-card text-foreground overflow-hidden">
       
-      {/* Desktop Navigation - Top Right */}
-      <motion.nav initial={{
-      opacity: 0,
-      y: -20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      duration: 0.6,
-      delay: 0.5
-    }} className="fixed top-1 right-4 z-50 hidden md:flex">
-        <div className="flex space-x-2 bg-background/80 backdrop-blur-lg border border-border/50 rounded-full px-3 py-2 shadow-lg">
-          {navigationItems.map(item => {
-            const getItemStyles = (color: string) => {
-              switch(color) {
-                case 'primary':
-                  return {
-                    bg: 'bg-primary/20 hover:bg-primary/30 border-primary/30',
-                    text: 'text-primary'
-                  };
-                case 'secondary':
-                  return {
-                    bg: 'bg-secondary/20 hover:bg-secondary/30 border-secondary/30',
-                    text: 'text-secondary'
-                  };
-                case 'accent':
-                  return {
-                    bg: 'bg-accent/20 hover:bg-accent/30 border-accent/30',
-                    text: 'text-accent'
-                  };
-                default:
-                  return {
-                    bg: 'bg-primary/20 hover:bg-primary/30 border-primary/30',
-                    text: 'text-primary'
-                  };
-              }
-            };
-            
-            const styles = getItemStyles(item.color);
-            
-            return (
-              <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`group relative w-12 h-12 rounded-full ${styles.bg} backdrop-blur-sm border flex items-center justify-center transition-all duration-200`} whileHover={{
-                scale: 1.1,
-                y: -2
-              }} whileTap={{
-                scale: 0.95
-              }}>
-                <item.icon className={`w-5 h-5 ${styles.text}`} />
-                
-                {/* Tooltip */}
-                <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                  <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md text-sm whitespace-nowrap shadow-lg border">
-                    {item.label}
-                  </div>
-                </div>
-              </motion.button>
-            );
-          })}
-        </div>
-      </motion.nav>
-
-      {/* Mobile Navigation - Hamburger Menu */}
-      <motion.div initial={{
-      opacity: 0,
-      scale: 0.8
-    }} animate={{
-      opacity: 1,
-      scale: 1
-    }} transition={{
-      duration: 0.6,
-      delay: 0.5
-    }} className="fixed top-1 right-2 z-50 md:hidden px-[2px] my-[7.5px]">
+      {/* Unified Navigation - Hamburger with Hover & Click */}
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="fixed top-4 right-4 z-50"
+        onMouseEnter={() => !isMenuOpen && setIsMenuOpen(true)}
+        onMouseLeave={() => isMenuOpen && setIsMenuOpen(false)}
+      >
         {/* Hamburger Button */}
-        <motion.button onClick={() => setIsMenuOpen(!isMenuOpen)} className="w-12 h-12 rounded-full bg-background/80 backdrop-blur-lg border border-border/50 flex items-center justify-center shadow-lg" whileHover={{
-        scale: 1.05
-      }} whileTap={{
-        scale: 0.95
-      }}>
-          <AnimatePresence mode="wait">
-            {isMenuOpen ? <motion.div key="close" initial={{
-            rotate: -90,
-            opacity: 0
-          }} animate={{
-            rotate: 0,
-            opacity: 1
-          }} exit={{
-            rotate: 90,
-            opacity: 0
-          }} transition={{
-            duration: 0.2
-          }}>
-                <X className="w-5 h-5 text-foreground" />
-              </motion.div> : <motion.div key="menu" initial={{
-            rotate: 90,
-            opacity: 0
-          }} animate={{
-            rotate: 0,
-            opacity: 1
-          }} exit={{
-            rotate: -90,
-            opacity: 0
-          }} transition={{
-            duration: 0.2
-          }}>
-                <Menu className="w-5 h-5 text-foreground" />
-              </motion.div>}
-          </AnimatePresence>
+        <motion.button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="relative w-14 h-14 rounded-full bg-background/90 backdrop-blur-lg border-2 border-primary/30 flex flex-col items-center justify-center gap-1.5 shadow-xl hover:border-primary/60 transition-all duration-300 group"
+          whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(var(--primary), 0.3)" }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.span 
+            className="w-6 h-0.5 bg-primary rounded-full transition-all duration-300"
+            animate={isMenuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+          />
+          <motion.span 
+            className="w-6 h-0.5 bg-primary rounded-full transition-all duration-300"
+            animate={isMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+          />
+          <motion.span 
+            className="w-6 h-0.5 bg-primary rounded-full transition-all duration-300"
+            animate={isMenuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+          />
+          
+          {/* Pulse effect on hover */}
+          <motion.div
+            className="absolute inset-0 rounded-full bg-primary/20"
+            initial={{ scale: 1, opacity: 0 }}
+            whileHover={{ scale: 1.5, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
         </motion.button>
 
-        {/* Mobile Menu */}
+        {/* Expandable Menu */}
         <AnimatePresence>
-          {isMenuOpen && <motion.div initial={{
-          opacity: 0,
-          scale: 0.8,
-          y: -10
-        }} animate={{
-          opacity: 1,
-          scale: 1,
-          y: 0
-        }} exit={{
-          opacity: 0,
-          scale: 0.8,
-          y: -10
-        }} transition={{
-          duration: 0.2
-        }} className="absolute top-16 right-0 bg-background/95 backdrop-blur-lg border border-border/50 rounded-2xl p-4 shadow-xl min-w-[200px]">
-              <div className="space-y-2">
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: -10 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="absolute top-20 right-0 bg-background/95 backdrop-blur-xl border-2 border-primary/30 rounded-3xl p-3 shadow-2xl min-w-[240px]"
+            >
+              <div className="space-y-1">
                 {navigationItems.map((item, index) => {
-                  const getMobileStyles = (color: string) => {
+                  const getItemStyles = (color: string) => {
                     switch(color) {
                       case 'primary':
-                        return {
-                          bg: 'bg-primary/10 hover:bg-primary/20',
-                          text: 'text-primary',
-                          hoverText: 'group-hover:text-primary'
-                        };
+                        return 'bg-primary/10 hover:bg-primary/25 text-primary border-primary/20';
                       case 'secondary':
-                        return {
-                          bg: 'bg-secondary/10 hover:bg-secondary/20',
-                          text: 'text-secondary',
-                          hoverText: 'group-hover:text-secondary'
-                        };
+                        return 'bg-secondary/10 hover:bg-secondary/25 text-secondary border-secondary/20';
                       case 'accent':
-                        return {
-                          bg: 'bg-accent/10 hover:bg-accent/20',
-                          text: 'text-accent',
-                          hoverText: 'group-hover:text-accent'
-                        };
+                        return 'bg-accent/10 hover:bg-accent/25 text-accent border-accent/20';
                       default:
-                        return {
-                          bg: 'bg-primary/10 hover:bg-primary/20',
-                          text: 'text-primary',
-                          hoverText: 'group-hover:text-primary'
-                        };
+                        return 'bg-primary/10 hover:bg-primary/25 text-primary border-primary/20';
                     }
                   };
                   
-                  const mobileStyles = getMobileStyles(item.color);
-                  
                   return (
-                    <motion.button key={item.id} onClick={() => scrollToSection(item.id)} className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl ${mobileStyles.bg} transition-all duration-200 text-left group`} initial={{
-                      opacity: 0,
-                      x: 20
-                    }} animate={{
-                      opacity: 1,
-                      x: 0
-                    }} transition={{
-                      duration: 0.2,
-                      delay: index * 0.05
-                    }} whileHover={{
-                      scale: 1.02,
-                      x: 4
-                    }} whileTap={{
-                      scale: 0.98
-                    }}>
-                      <item.icon className={`w-5 h-5 ${mobileStyles.text} group-hover:scale-110 transition-transform duration-200`} />
-                      <span className={`font-medium text-foreground ${mobileStyles.hoverText} transition-colors duration-200`}>
+                    <motion.button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`w-full flex items-center space-x-4 px-5 py-4 rounded-2xl border transition-all duration-300 text-left group ${getItemStyles(item.color)}`}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.08 }}
+                      whileHover={{ scale: 1.03, x: 6 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      <motion.div
+                        className="relative"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <item.icon className="w-6 h-6" />
+                      </motion.div>
+                      <span className="font-semibold text-lg text-foreground group-hover:translate-x-1 transition-transform duration-300">
                         {item.label}
                       </span>
+                      <ExternalLink className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.button>
                   );
                 })}
               </div>
-            </motion.div>}
+              
+              {/* Decorative gradient */}
+              <motion.div
+                className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl blur-xl opacity-20 -z-10"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              />
+            </motion.div>
+          )}
         </AnimatePresence>
       </motion.div>
       
